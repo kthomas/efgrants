@@ -1,0 +1,24 @@
+{
+  "name": "efgrants",
+  "version": "0.0.0",
+  "description": "smart contracts to improve transparency and provide lightweight on-chain governance for grants awarded to deserving projects in the Ethereum ecosystem and beyond",
+  "repository": "git@github.com:kthomas/efgrants.git",
+  "scripts": {},
+  "author": "Kyle Thomas <kyle@provide.services>",
+  "copyright": "2019 Kyle Thomas",
+  "license": "MIT",
+  "dependencies": {
+    "openzeppelin-solidity": "^2.1.1"
+  },
+  "devDependencies": {
+    "bignumber.js": "^8.0.2",
+    "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
+    "chai-bignumber": "^3.0.0",
+    "mocha": "^5.2.0",
+    "mochawesome": "^3.0.0",
+    "solc": "^0.5.4",
+    "truffle": "^5.0.1",
+    "truffle-flattener": "^1.2.10"
+  }
+}

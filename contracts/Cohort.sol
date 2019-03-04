@@ -1,7 +1,6 @@
 pragma solidity ^0.5.4;
 
 import "openzeppelin-solidity/contracts/payment/escrow/ConditionalEscrow.sol";
-import "openzeppelin-solidity/contracts/ownership/Secondary.sol";
 import "./GrantApplication.sol";
 import "./Unicorn.sol";
 
@@ -11,7 +10,7 @@ import "./Unicorn.sol";
  * deposited. Grantees (Unicorns) may conditionally withdraw from the Cohort escrow up
  * to their allocation and in accordance with project milestones, if applicable.
  */
-contract Cohort is ConditionalEscrow, Secondary {
+contract Cohort is ConditionalEscrow {
 
     /** Block when grant applications are accepted by the cohort. */
     uint public applicationsOpenBlock;
@@ -38,8 +37,12 @@ contract Cohort is ConditionalEscrow, Secondary {
         name = _name;
     }
 
-    function() public payable onlyPrimary {
-        escrow.transfer(msg.value);
+    function() external payable onlyPrimary {
+        escrow.deposit(address(this)); // FIXME
+    }
+
+    function withdrawalAllowed(address payee) public view returns (bool) {
+        return false; // FIXME: lookup unicorn and determine if project meets criteria for withdraw
     }
 
     /**
@@ -53,8 +56,8 @@ contract Cohort is ConditionalEscrow, Secondary {
      * Approve a grant application, promote the underlying
      * Unicorn and forward all wei to the accepted project.
      */
-    function approveGrant() public payable onlyPrimary {
-        escrow.transfer(msg.value);
+    function approveGrant(address _grantApplication) public payable onlyPrimary {
+        escrow.deposit(_grantApplication);
     }
 
     function isAcceptingApplications() public view returns (bool) {

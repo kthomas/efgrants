@@ -32,7 +32,7 @@ contract Foundation is Ownable {
     function upcomingCohort() public view returns (address _cohort) {
         if (cohorts.length > 0) {
             Cohort cohort = cohorts[cohorts.length - 1];
-            if (cohort.applicationsOpenBlock > block.number) {
+            if (cohort.applicationsOpenBlock() > block.number) {
                 _cohort = address(cohort);
             }
         }
